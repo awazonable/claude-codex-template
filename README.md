@@ -76,6 +76,10 @@ See:
 - `docs/workflow/context-management-policy.md` — Main/Research Subagent/Codex Worker delegation hierarchy and context economy
 - `docs/workflow/initialization-checklist.md` — tracks the initialization procedure above to completion
 
+## License
+
+This template, including the generated project's initial `LICENSE` file, is released under the [BSD Zero Clause License](https://opensource.org/license/0bsd) (`LICENSE`): free to reuse and modify, with no attribution required. Projects created from this template inherit it; replace `LICENSE` during initialization if the project needs different terms.
+
 ## Codex integration
 
 Use `PeterSR/claude-code-codex-subagent` (or an equivalent adapter) as a dependency/integration layer rather than forking it into this template. The template owns the development policy; the adapter owns Claude↔Codex execution plumbing.
