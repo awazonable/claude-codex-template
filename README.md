@@ -18,7 +18,7 @@ Then open the new repository with Claude Code and ask it to initialize the proje
 
 ## Initialization procedure
 
-Claude must perform the following before normal development work:
+Claude must perform the following before normal development work. Track progress with `docs/workflow/initialization-checklist.md`.
 
 1. Confirm this template README is still present. If it is, treat the repository as **uninitialized**.
 2. Grill the human for the project goal, requirements, constraints, non-goals, important tradeoffs, and unresolved decisions.
@@ -74,6 +74,7 @@ See:
 - `docs/workflow/code-review-policy.md` — independent implementation review
 - `docs/workflow/pr-merge-policy.md` — final integration gate
 - `docs/workflow/context-management-policy.md` — Main/Research Subagent/Codex Worker delegation hierarchy and context economy
+- `docs/workflow/initialization-checklist.md` — tracks the initialization procedure above to completion
 
 ## Codex integration
 

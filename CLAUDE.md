@@ -28,8 +28,9 @@ The human interface remains Claude. Do not redirect routine coordination to Code
 Claude Main is an expensive, continuously re-evaluated context. The optimization target is the number of times that large context gets re-processed, not the raw count of tool calls.
 
 - At startup only, read `CLAUDE.md` / `AGENTS.md`, `README.md`, the ADR index / relevant ADRs, and the current task spec.
-- After startup, do not perform exploratory `read` / `grep` / `search` / log inspection / repository exploration directly. Delegate it to a Research Subagent.
+- After startup, do not perform open-ended exploratory `read` / `grep` / `search` / log inspection / repository exploration directly. Delegate it to a Research Subagent.
 - Focus Main's own turns on design, decisions, task decomposition, `write`/`edit`, delegation, and final integration.
+- Re-reading the requirements/design documents Main itself authors, and reading the diff/report under review during the Review step below, are Main's own work, not exploration. Widening from there into repo-wide search, history, or log/test-failure digging still goes to a Research Subagent.
 
 See `docs/workflow/context-management-policy.md` for the full Research Subagent / Codex Worker delegation hierarchy and the one-delegation-one-report contract.
 
@@ -51,7 +52,7 @@ Do not duplicate every constraint into a rigid task schema when it is already au
 
 Prefer giving Codex responsibility for an outcome, not step-by-step implementation instructions.
 
-Start each Codex Worker with an explicit scope, the relevant ADRs, constraints/implementation direction, and the expected report contract, per `docs/workflow/context-management-policy.md`.
+Start each Codex Worker with an explicit scope, the relevant ADRs, pointers to the governing constraints (not restatements), and the expected report contract, per `docs/workflow/context-management-policy.md`.
 
 ## During Codex execution
 
@@ -75,10 +76,11 @@ Intervene when:
 
 After Codex reports completion:
 
-- inspect the actual diff and repository state;
+- inspect the actual diff and repository state directly — this is Main's own work, not delegable exploration;
 - review from an independent perspective rather than reproducing Codex self-review;
 - verify design and requirement conformance;
 - inspect relevant test/type/lint results and run checks when appropriate;
+- if the diff raises questions that require widening beyond it (repo-wide search, history, log/test-failure digging), delegate that widening to a Research Subagent and judge its compressed report rather than digging directly;
 - surface material issues to Codex for correction before presenting the work as complete.
 
 Claude's review is independent because the implementation author and final technical reviewer should not be the same agent perspective.

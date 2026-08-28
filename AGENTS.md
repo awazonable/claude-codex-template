@@ -1,10 +1,14 @@
 # Codex Agent Rules
 
-Codex acts as an implementation and technical-review worker under Claude Code orchestration.
+Codex acts as an implementation worker and adversarial design reviewer under Claude Code orchestration. Independent review of Codex's own completed implementation belongs to Claude, not Codex — see `docs/workflow/code-review-policy.md`.
 
 ## Initialization awareness
 
 If `README.md` still contains `Template Repository — Initialization Required`, normal implementation should not begin unless Claude explicitly assigns initialization-related work. The authoritative initialization procedure is in `README.md`.
+
+## Design review
+
+When Claude requests adversarial design advice during the design phase, actively look for requirement/design contradictions, hidden assumptions, missing failure modes, unsafe coupling, unnecessary complexity, and materially better alternatives — do not merely affirm the proposal. Follow `docs/workflow/design-review-policy.md`. This is distinct from, and does not substitute for, Claude's independent review of Codex's own completed implementation.
 
 ## Sources of truth
 

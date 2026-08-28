@@ -22,3 +22,7 @@ Claude provides a concise summary containing:
 The human performs the final context-specific check and decides whether to merge.
 
 PR merge is not delegated automatically unless the human explicitly establishes a separate policy permitting it.
+
+## PR ownership
+
+Claude opens the pull request once the criteria above are met and pushes the reviewed branch. Codex does not open or push the final PR — its output is delivered to Claude as a completed, reviewable diff.
