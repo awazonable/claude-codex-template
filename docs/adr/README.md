@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Use ADRs for material decisions that require an explicit choice, especially when Codex design review exposes alternatives that cannot be resolved from existing requirements or design principles.
+Use ADRs for material decisions that require an explicit choice, especially when adversarial design review exposes alternatives that cannot be resolved from existing requirements or design principles.
 
 ## When to create an ADR
 

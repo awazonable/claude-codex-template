@@ -2,7 +2,7 @@
 
 This directory contains the implementation-facing system design derived from the requirements.
 
-Claude/Opus authors and evolves the design, using Codex/Sol as an adversarial adviser before design freeze.
+Claude Main authors and evolves the design, using adversarial advice requested through the `codex-worker` profile before design freeze.
 
 Design documentation should make major engineering direction clear while leaving routine local implementation choices to the implementing agent.
 

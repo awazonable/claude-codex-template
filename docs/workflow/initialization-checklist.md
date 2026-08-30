@@ -2,11 +2,11 @@
 
 Use this checklist only while converting the template into a real project.
 
-- [ ] Human project goal has been Grill-reviewed with Claude/Opus.
+- [ ] Human project goal has been Grill-reviewed with Claude Main.
 - [ ] Project requirements are written under `docs/requirements/`.
 - [ ] Project design is written under `docs/design/`.
 - [ ] Material unresolved decisions have been made by the human and captured as ADRs.
-- [ ] Codex/Sol adversarial design review has been performed.
+- [ ] Adversarial design review has been performed through the `codex-worker` profile.
 - [ ] Material design-review findings are resolved.
 - [ ] Major design direction is considered ready for implementation.
 - [ ] Template `README.md` has been completely replaced with a project-specific README.

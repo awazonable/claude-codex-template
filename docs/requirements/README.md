@@ -2,7 +2,7 @@
 
 This directory contains authoritative project requirements.
 
-Requirements are produced through human↔Claude Grill-style discovery before implementation. They should contain the information Codex needs to execute goals without requiring routine clarification.
+Requirements are produced through human↔Claude Main Grill-style discovery before implementation. They should contain the information an implementation worker needs to execute goals without requiring routine clarification.
 
 Capture, as appropriate:
 

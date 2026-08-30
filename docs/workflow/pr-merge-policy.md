@@ -3,15 +3,15 @@
 A PR is ready for human final review when:
 
 - delegated implementation goals are complete;
-- material Codex/implementation blockers are resolved or explicitly documented;
-- Claude has independently reviewed the resulting code;
+- material implementation blockers are resolved or explicitly documented;
+- Claude Main has independently reviewed the resulting code;
 - material review findings are resolved;
 - relevant automated or manual verification has been performed, or missing verification is explicitly disclosed;
 - requirements/design/ADRs are updated when implementation caused an approved change to authoritative project decisions.
 
 ## Human final check
 
-Claude provides a concise summary containing:
+Claude Main provides a concise summary containing:
 
 - what changed;
 - which requirements/goals were satisfied;
@@ -25,4 +25,4 @@ PR merge is not delegated automatically unless the human explicitly establishes 
 
 ## PR ownership
 
-Claude opens the pull request once the criteria above are met and pushes the reviewed branch. Codex does not open or push the final PR — its output is delivered to Claude as a completed, reviewable diff.
+Claude Main opens the pull request once the criteria above are met and pushes the reviewed branch. The `codex-worker` profile does not open or push the final PR — its output is delivered to Claude Main as a completed, reviewable diff.

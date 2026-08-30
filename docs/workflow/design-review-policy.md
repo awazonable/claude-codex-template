@@ -2,15 +2,15 @@
 
 ## Roles
 
-- **Author:** Claude/Opus
-- **Adversarial adviser:** Codex/Sol
+- **Author:** Claude Main
+- **Adversarial adviser:** the `codex-worker` profile
 - **Decision authority:** Human, when an unresolved material choice requires judgment
 
 ## Purpose
 
 Design review exists to challenge the proposed architecture before implementation, not to produce consensus for its own sake.
 
-Codex should actively look for:
+Adversarial design review examines:
 
 - requirement/design contradictions;
 - hidden assumptions;
@@ -23,9 +23,9 @@ Codex should actively look for:
 
 ## Review loop
 
-1. Claude produces or updates the design.
-2. Codex reviews it adversarially.
-3. Claude classifies findings:
+1. Claude Main produces or updates the design.
+2. The `codex-worker` profile reviews it adversarially through the Harness.
+3. Claude Main classifies findings:
    - fix directly;
    - reject with rationale;
    - escalate to human decision.
