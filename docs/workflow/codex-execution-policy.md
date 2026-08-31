@@ -1,6 +1,6 @@
 # Codex Execution Policy
 
-Codex is responsible for the delegated goal until it is completed and verified or a permitted escalation condition is reached.
+The `codex-worker` profile is responsible for the delegated goal until it is completed and verified or a permitted escalation condition is reached.
 
 ## Autonomous execution
 
@@ -22,7 +22,7 @@ Prefer reasonable decisions consistent with existing requirements, ADRs, reposit
 
 ## Permitted escalation conditions
 
-Stop and ask Claude for a decision only when one of the following applies:
+Stop and ask Claude Main for a decision only when one of the following applies:
 
 1. **Conflicting authority** — Requirements, design, or ADRs materially contradict each other and the conflict cannot be resolved by reasonable interpretation.
 2. **Unresolved architectural decision** — Goal completion requires a material project-level or architectural choice not already settled by requirements or ADRs.
@@ -31,7 +31,7 @@ Stop and ask Claude for a decision only when one of the following applies:
 
 ## Do not escalate routine engineering work
 
-The following normally remain Codex responsibility:
+The following normally remain `codex-worker` responsibility:
 
 - function/class/module decomposition;
 - local type design;
@@ -50,7 +50,7 @@ Explore broadly enough to understand the problem, but modify only what is justif
 
 Do not use a local implementation problem as justification for unrelated architectural cleanup.
 
-When investigation indispensable to the goal falls outside the assigned scope, delegate that investigation to a read-only Research Subagent instead of expanding scope yourself; see `context-management-policy.md`. This does not apply once the goal requires *modifying* something outside the assigned scope — that is scope expansion and follows the escalation path below.
+When investigation indispensable to the goal falls outside the assigned scope, request the Harness-managed `research` profile instead of treating investigation as permission to expand scope; see `context-management-policy.md`. This does not apply once the goal requires *modifying* something outside the assigned scope — that is scope expansion and follows the escalation path below.
 
 If scope expansion is necessary, escalate with:
 

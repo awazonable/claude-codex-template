@@ -2,8 +2,8 @@
 
 ## Roles
 
-- **Implementation author:** normally Codex
-- **Independent technical reviewer:** Claude/Opus
+- **Implementation author:** normally the `codex-worker` profile
+- **Independent technical reviewer:** Claude Main
 - **Final project-specific gate:** Human
 
 The reviewer should provide a meaningfully different perspective from the implementation author.
@@ -37,4 +37,4 @@ After corrections, re-review the affected areas as needed.
 
 ## Completion
 
-Claude may recommend human final approval when no material unresolved review findings remain and verification evidence is adequate for the task.
+Claude Main may recommend human final approval when no material unresolved review findings remain and verification evidence is adequate for the task.

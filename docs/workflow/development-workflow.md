@@ -2,91 +2,38 @@
 
 ## 1. Human interface
 
-The human interacts with Claude Code. Claude remains the orchestration and decision interface throughout the lifecycle.
+The human interacts with Claude Main, which remains the orchestration and decision interface throughout the lifecycle.
 
 ## 2. Requirement discovery
 
-Claude/Opus uses Grill-style questioning to convert the human's intent into sufficiently complete requirements.
+Claude Main uses Grill-style questioning to convert the human's intent into sufficiently complete requirements. The objective is to resolve important ambiguity before implementation rather than pushing routine requirement discovery into implementation.
 
-The objective is to resolve important ambiguity before implementation rather than pushing routine requirement discovery into the implementation phase.
+## 3. Design and adversarial review
 
-## 3. Design
+Claude Main creates the design from the requirements. An adversarial design review is requested through the `codex-worker` profile; the review assesses assumptions, architectural risks, missing cases, contradictions, and materially better alternatives.
 
-Claude/Opus creates the design from the requirements.
+Claude Main evaluates review feedback, updates objectively resolvable defects, obtains human decisions for material choices, and records lasting decisions as ADRs. The loop ends when no material objections to the major design direction remain.
 
-Codex/Sol is then asked for adversarial design advice. Codex should challenge assumptions, identify architectural risks, missing cases, contradictions, and better alternatives rather than merely affirm the proposal.
+## 4. Design freeze and task decomposition
 
-## 4. Decision loop
+When requirements, design, and required ADRs are sufficiently stable, the design is ready for implementation. Claude Main decomposes the design into scoped outcomes and cites the authoritative requirements, design documents, ADRs, and relevant paths. Design freeze still permits approved change; it prevents casually reopening settled architecture.
 
-Claude evaluates review feedback.
+## 5. Profile-based execution
 
-- If feedback exposes an objectively resolvable defect, update the design.
-- If feedback exposes a material choice requiring human judgment, ask the human.
-- Record material lasting decisions as ADRs.
+Claude Main delegates through the configured Harness by selecting a profile and supplying the task. For implementation and adversarial design work, the profile is `codex-worker`; for bounded investigation, it is `research`.
 
-Repeat the design review loop until there are no significant objections to the major design direction. Minor implementation details need not be exhausted before implementation.
+The Harness, not Claude Main, resolves `profile -> prompt / tools / permissions / applicable policies` and injects the resulting agent-specific context. Main does not read, copy, or relay Research or Codex prompts. This permits the adapter implementation to change without changing the lifecycle or weakening prompt isolation.
 
-## 5. Design freeze
+## 6. Monitoring, completion, and review
 
-When requirements, design, and required ADRs are sufficiently stable, declare the design ready for implementation.
+Claude Main monitors at the orchestration level while delegated work is in progress. After implementation, Claude Main independently reviews the actual diff and verification evidence against the authoritative project documents. Material findings return to the appropriate profile for correction.
 
-Design freeze does not prohibit all change. It means implementation should not casually reopen settled architecture.
+## 7. Human final gate
 
-## 6. Task decomposition
+Claude Main summarizes the completed work, review outcome, verification, and residual risks. The human performs the final project-specific check and decides whether to merge.
 
-Claude decomposes the design into goals suitable for Codex execution.
+## 8. Integration architecture
 
-A delegated task normally needs:
+Use `PeterSR/claude-code-codex-subagent` or an equivalent mechanism as the execution adapter rather than embedding its implementation into this template. The adapter/Harness owns profile resolution and context injection; this repository owns the project workflow and authoritative project documents.
 
-- a clear goal;
-- references to authoritative requirements/design/ADRs;
-- scope or ownership boundaries when necessary to avoid ambiguity or conflicting concurrent work.
-
-Do not mechanically restate constraints already present in authoritative documents.
-
-## 7. Codex implementation
-
-Claude delegates the goal to Codex through the configured Claude↔Codex adapter.
-
-Codex owns execution and should autonomously:
-
-- inspect relevant repository state;
-- choose routine implementation details;
-- implement;
-- test/check;
-- diagnose failures;
-- revise and retest;
-- continue until completion or a permitted escalation condition.
-
-See `codex-execution-policy.md`.
-
-## 8. Claude monitoring
-
-Claude monitors at orchestration level, not line-by-line implementation level.
-
-Intervention is reserved for:
-
-- explicit permitted escalation;
-- material scope or requirement divergence;
-- obvious stalls/loops;
-- cross-task coordination issues.
-
-## 9. Completion and independent review
-
-When Codex completes a goal, Claude reviews the actual resulting code/diff independently.
-
-Claude checks requirement/design conformance, correctness risks, maintainability, and verification evidence. Material findings are returned for correction.
-
-## 10. Human final gate
-
-Claude summarizes the implementation and review results to the human. The human performs the final project-specific check and approves PR merge.
-
-## 11. Context economy
-
-Throughout the lifecycle, Claude Main delegates exploratory investigation (read/grep/search/log inspection/repository exploration) to a read-only Research Subagent rather than performing it directly after startup, and Codex Workers do the same for investigation outside their assigned scope. See `context-management-policy.md` for the full hierarchy and delegation contract.
-
-## 12. Integration architecture
-
-Use `PeterSR/claude-code-codex-subagent` or an equivalent mechanism as the execution adapter rather than embedding its implementation into this template.
-
-Keep orchestration policy independent from the adapter so the project can later adopt native Codex Goal/App Server control without rewriting the development process.
+See `context-management-policy.md` for the prompt-isolation architecture and `agent-capability-index.md` for the Main-visible profile purposes.
